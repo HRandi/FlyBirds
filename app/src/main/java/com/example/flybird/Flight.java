@@ -100,6 +100,7 @@ public class Flight {
         return new Rect(x, y, x + width, y + height);
     }
 
+    //when birds die
     Bitmap getDead() {
         return dead;
     }
