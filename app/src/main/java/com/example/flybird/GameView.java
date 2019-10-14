@@ -87,6 +87,7 @@ public class GameView extends SurfaceView implements Runnable{
 
     }
 
+    //fonction drawing
     private void draw(){
 
         if (getHolder().getSurface().isValid()){
