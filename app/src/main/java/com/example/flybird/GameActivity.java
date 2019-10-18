@@ -1,10 +1,10 @@
 package com.example.flybird;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -26,13 +26,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         gameView.pause();
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         gameView.resume();
     }

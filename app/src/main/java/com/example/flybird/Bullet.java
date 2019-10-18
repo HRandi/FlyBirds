@@ -13,7 +13,7 @@ public class Bullet {
     int x, y, width, height;
     Bitmap bullet;
 
-    Bullet (Resources res){
+    Bullet(Resources res) {
         bullet = BitmapFactory.decodeResource(res, R.drawable.bullet);
 
         width = bullet.getWidth();

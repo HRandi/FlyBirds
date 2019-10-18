@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameView extends SurfaceView implements Runnable{
+public class GameView extends SurfaceView implements Runnable {
 
+    public static float screenRatioX, screenRatioY;
     private Thread thread;
     private boolean isPlaying, isGameOver = false;
     private int screenX, screenY, score = 0;
-    public static float screenRatioX, screenRatioY;
     private Paint paint;
     private Bird[] birds;
     private SharedPreferences prefs;
@@ -50,11 +50,14 @@ public class GameView extends SurfaceView implements Runnable{
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .setUsage(AudioAttributes.USAGE_GAME)
                     .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(audioAttributes)
+                    .build();
         } else
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         sound = soundPool.load(activity, R.raw.shoot, 1);
 
-        this.screenX =screenX;
+        this.screenX = screenX;
         this.screenY = screenY;
         screenRatioX = 1920f / screenX;
         screenRatioY = 1080f / screenY;
@@ -62,7 +65,7 @@ public class GameView extends SurfaceView implements Runnable{
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
 
-        flight =  new Flight( this, screenY, getResources());
+        flight = new Flight(this, screenY, getResources());
         bullets = new ArrayList<>();
 
         background2.x = screenX;
@@ -87,22 +90,22 @@ public class GameView extends SurfaceView implements Runnable{
     @Override
     public void run() {
 
-        while(isPlaying){
-            update ();
-            draw ();
-            sleep ();
+        while (isPlaying) {
+            update();
+            draw();
+            sleep();
         }
     }
 
-    private void update(){
+    private void update() {
 
         background1.x -= 10 * screenRatioX;
         background2.x -= 10 * screenRatioX;
 
-        if (background1.x + background1.background.getWidth() < 0){
+        if (background1.x + background1.background.getWidth() < 0) {
             background1.x = screenX;
         }
-        if (background2.x + background2.background.getWidth() < 0){
+        if (background2.x + background2.background.getWidth() < 0) {
             background2.x = screenX;
         }
         if (flight.isGoingUp)
@@ -174,9 +177,9 @@ public class GameView extends SurfaceView implements Runnable{
     }
 
     //fonction drawing
-    private void draw(){
+    private void draw() {
 
-        if (getHolder().getSurface().isValid()){
+        if (getHolder().getSurface().isValid()) {
 
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
@@ -252,7 +255,7 @@ public class GameView extends SurfaceView implements Runnable{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (event.getX() < screenX / 2) {
                     flight.isGoingUp = true;
@@ -274,8 +277,8 @@ public class GameView extends SurfaceView implements Runnable{
         if (!prefs.getBoolean("isMute", false))
             soundPool.play(sound, 1, 1, 0, 0, 1);
         Bullet bullet = new Bullet(getResources());
-        bullet.x  = flight.x + flight.width;
-        bullet.y = flight.y + (flight.height /2);
+        bullet.x = flight.x + flight.width;
+        bullet.y = flight.y + (flight.height / 2);
         bullets.add(bullet);
 
     }
