@@ -35,7 +35,7 @@ public class GameView extends SurfaceView implements Runnable {
     private SoundPool soundPool;
     private int sound;
 
-    //Constructor of the game
+    // Constructor of the game
 
     public GameView(GameActivity activity, int screenX, int screenY) {
         super(activity);
