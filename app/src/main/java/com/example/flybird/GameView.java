@@ -211,6 +211,7 @@ public class GameView extends SurfaceView implements Runnable {
     private void waitBeforeExiting() {
         try {
             Thread.sleep(3000);
+
             activity.startActivity(new Intent(activity, MainActivity.class));
             activity.finish();
         } catch (InterruptedException e) {
@@ -219,7 +220,7 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void saveIfHighScore() {
-        if (prefs.getInt("highsocre", 0) < score) {
+        if (prefs.getInt("highscore", 0) < score) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt("highscore", score);
             editor.apply();
