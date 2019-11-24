@@ -8,8 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +17,7 @@
         android:layout_below="@+id/highScoreTxt"
         android:layout_centerHorizontal="true"
         android:text="Fly Bird Game"
-        android:textColor="#ffffff"
+        android:textColor="#3F51B5"
         android:textSize="48sp" />
 
     <TextView
@@ -27,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Play"
-        android:textColor="#000000"
+        android:textColor="#3F51B5"
         android:textSize="64sp" />
 
 
@@ -38,7 +37,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
         android:text="High Score"
-        android:textColor="#000000"
+        android:textColor="#3F51B5"
         android:textSize="24sp" />
 
     <ImageView
@@ -70,5 +69,48 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_weight="9" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/address"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="254dp"
+        android:hint="Address" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/city"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="190dp"
+        android:hint="City" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/country"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="131dp"
+        android:hint="Country" />
+
 
 </RelativeLayout>
