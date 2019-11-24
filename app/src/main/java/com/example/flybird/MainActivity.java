@@ -3,15 +3,21 @@ package com.example.flybird;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
 public class MainActivity extends AppCompatActivity {
+
     private boolean isMute;
+    private GestureDetectorCompat mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,5 +59,33 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        mGestureDetector = new GestureDetectorCompat(this, new GestureListener());
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        mGestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Toast.makeText(MainActivity.this, "Fly bird game :) ", Toast.LENGTH_SHORT).show();
+            return super.onFling(e1, e2, velocityX, velocityY);
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            Toast.makeText(MainActivity.this, "Appuyer sur play pour jouer, et l'icone en bas à gauche pour désactiver le son", Toast.LENGTH_SHORT).show();
+            return super.onDoubleTap(e);
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            Toast.makeText(MainActivity.this, "Amusez vous bien", Toast.LENGTH_SHORT).show();
+            return super.onSingleTapConfirmed(e);
+        }
     }
 }
