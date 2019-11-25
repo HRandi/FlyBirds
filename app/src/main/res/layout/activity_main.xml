@@ -23,7 +23,7 @@
         android:layout_marginEnd="540dp"
         android:layout_marginRight="543dp"
         android:layout_marginBottom="300dp"
-        android:text="Fly Bird Game"
+        android:text="@string/fly_Bird_game"
         android:textColor="#3F51B5"
         android:textSize="30sp" />
 
@@ -39,7 +39,7 @@
         android:layout_marginRight="108dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
-        android:text=" PLAY"
+        android:text="@string/play"
         android:textAlignment="center"
         android:textColor="#FFEB3B"
         android:textStyle="bold" />
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:text="High Score"
+        android:text="@string/high_score"
         android:textColor="#3F51B5"
         android:textSize="24sp" />
 
@@ -63,7 +63,7 @@
         android:src="@drawable/ic_volume_up_black_24dp" />
 
     <Button
-        android:id="@+id/btnCamera"
+        android:id="@+id/capture_image_btn"
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
@@ -91,7 +91,7 @@
         android:layout_marginRight="511dp"
         android:layout_marginBottom="12dp"
         android:background="@color/colorPrimaryDark"
-        android:text="locate"
+        android:text="@string/locate"
         android:textColor="#FFEB3B" />
 
     <ImageView
@@ -107,18 +107,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/address"
-        android:layout_width="500dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="85dp"
-        android:layout_marginRight="85dp"
-        android:layout_marginBottom="228dp"
-        android:hint="Address" />
-
-    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/city"
         android:layout_width="500dp"
         android:layout_height="40dp"
@@ -127,8 +115,20 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="83dp"
         android:layout_marginRight="83dp"
-        android:layout_marginBottom="175dp"
-        android:hint="City" />
+        android:layout_marginBottom="132dp"
+        android:hint="@string/city_name" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/address"
+        android:layout_width="500dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="85dp"
+        android:layout_marginRight="85dp"
+        android:layout_marginBottom="187dp"
+        android:hint="@string/address" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/country"
@@ -139,8 +139,22 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="86dp"
         android:layout_marginRight="86dp"
-        android:layout_marginBottom="115dp"
-        android:hint="Country" />
+        android:layout_marginBottom="74dp"
+        android:hint="@string/country_name" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="250dp"
+        android:layout_height="2500dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="219dp"
+        android:layout_marginRight="219dp"
+        android:layout_marginBottom="235dp"
+        android:layout_weight="9"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_portrait_black_24dp" />
 
 
 </RelativeLayout>

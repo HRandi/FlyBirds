@@ -1,6 +1,7 @@
 package com.example.flybird;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.GestureDetector;
@@ -39,12 +42,18 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int PERMISSION_CODE = 1000;
+    private static final int IMAGE_CAPTURE_CODE = 1001;
     TextInputEditText address;
     TextInputEditText city;
     TextInputEditText country;
 
     LocationManager locationManager;
     LocationListener locationListener;
+
+    Button mCaptureBtn;
+    ImageView mImageView;
+    Uri image_uri;
 
     ImageView imageView;
     private Accelerometer accelerometer;
@@ -56,6 +65,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //App photo
+
+        mImageView = findViewById(R.id.image_view);
+        mCaptureBtn = findViewById(R.id.capture_image_btn);
+
+        //capture_image_btn click
+
+        mCaptureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //si la version Android est marshmallow, demande de permission
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) ==
+                            PackageManager.PERMISSION_DENIED ||
+                            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                                    PackageManager.PERMISSION_DENIED) {
+                        //Permission not enabled, on la demande
+                        String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                        //pop up pour la demande de permission
+                        requestPermissions(permission, PERMISSION_CODE);
+                    } else {
+                        //permission deja validée
+                        openCamera();
+                    }
+                } else {
+                    openCamera();
+                }
+            }
+        });
+
+
+
+
+
+
 
         address = findViewById(R.id.address);
         city = findViewById(R.id.city);
@@ -122,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnCamera = findViewById(R.id.btnCamera);
+       /* Button btnCamera = findViewById(R.id.btnCamera);
         ImageView imageView = findViewById(R.id.imageView);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 0);
             }
-        });
-
+        });*/
 
 
         TextView highScoreTxt = findViewById(R.id.highScoreTxt);
@@ -191,6 +236,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void openCamera() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the camera");
+        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -209,6 +266,17 @@ public class MainActivity extends AppCompatActivity {
             address.setText("Access not granted");
             city.setText("Access not granted");
             country.setText("Access not granted");
+        }
+
+        switch (requestCode) {
+            case PERMISSION_CODE: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    openCamera();
+                } else {
+                    Toast.makeText(this, "Persmission denied", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
 
     }
@@ -232,6 +300,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
         imageView.setImageBitmap(bitmap);
+        //appeler cette methode quand l image sera capturer
+
+        if (resultCode == RESULT_OK) {
+            //afficher l'image capturer dans l'image view
+            mImageView.setImageURI(image_uri);
+        }
     }
 
     @Override
@@ -271,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-            Toast.makeText(MainActivity.this, "Appuyer sur play pour jouer, et l'icone en bas à gauche pour désactiver le son", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "click play to play the game and the icon left to deactivate the sound", Toast.LENGTH_SHORT).show();
             return super.onDoubleTap(e);
         }
 

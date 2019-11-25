@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">FlyBird</string>
+    <string name="high_score">High Score</string>
+    <string name="play">Play</string>
+    <string name="country_name">Country</string>
+    <string name="city_name">City</string>
+    <string name="locate">Locate</string>
+    <string name="address">Address</string>
+    <string name="fly_Bird_game">Fly Bird Game</string>
+    <string name="toast">click play to play the game and the icon left to deactivate the sound</string>
 </resources>

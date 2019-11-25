@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">vol d\'oiseau</string>
+    <string name="address">Adresse</string>
+    <string name="city_name">Ville</string>
+    <string name="country_name">Pays</string>
+    <string name="fly_Bird_game">Jeu vol d\'oiseau</string>
+    <string name="high_score">Score élevé</string>
+    <string name="locate">Localiser</string>
+    <string name="play">Jouer</string>
+    <string name="toast">cliquez sur play pour jouer au jeu et sur l\'icône de gauche pour désactiver le son</string>
+</resources>
